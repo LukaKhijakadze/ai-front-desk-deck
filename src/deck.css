@@ -282,7 +282,7 @@ p { line-height: 1.55; }
 .staff p b { color: var(--ink); }
 :lang(ka) .vs-h { letter-spacing: .03em; }
 
-/* ---------- chrome: nav, language, progress, modal ---------- */
+/* ---------- chrome: nav, language, progress, inline video ---------- */
 .ui { position: fixed; z-index: 20; font-size: 13px; }
 .topbar { top: 14px; right: 16px; display: flex; gap: 8px; }
 .pill { background: rgba(19,18,16,.75); border: 1px solid rgba(255,255,255,.12); color: var(--ink); text-decoration: none; border-radius: 999px; padding: 7px 12px; backdrop-filter: blur(6px); }
@@ -292,13 +292,15 @@ p { line-height: 1.55; }
 .nav .count { color: var(--muted); min-width: 52px; text-align: center; }
 .progress { left: 0; right: 0; bottom: 0; height: 3px; background: rgba(255,255,255,.05); }
 .progress i { display: block; height: 100%; width: 0; background: var(--gold); transition: width .2s ease; }
-.modal { position: fixed; inset: 0; z-index: 50; background: rgba(11,10,9,.9); display: none; place-items: center; }
-.modal.on { display: grid; }
-.modal video { max-width: 92vw; max-height: 86vh; border-radius: 12px; background: #000; }
-.modal .msg { color: var(--muted); font-size: 18px; display: none; }
-.modal.missing .msg { display: block; }
-.modal.missing video { display: none; }
-.modal .x { position: absolute; top: 16px; right: 18px; }
+
+/* inline slide video: fills the phone screen / poster box; the whole frame shows, bars rather than a crop */
+.inl { display: none; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; z-index: 4; }
+.inl.on { display: block; }
+.soon { display: none; position: absolute; left: 12px; right: 12px; top: 50%; transform: translateY(-50%); z-index: 5; margin: 0; padding: 12px 14px;
+  border-radius: 12px; text-align: center; font-size: 15px; color: var(--muted); background: rgba(19,18,16,.92); border: 1px solid var(--line); }
+.soon.on { display: block; }
+.play.gone { display: none; }
+.shot .scr { position: relative; }
 
 /* ---------- flow: phones and portrait windows ---------- */
 @media screen and (max-width: 860px), screen and (max-aspect-ratio: 1/1) {
@@ -359,7 +361,7 @@ body.all .ui { display: none; }
   html, body { height: auto; overflow: visible; background: var(--bg); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .deck { position: static; }
   .slide { display: block !important; position: relative; left: auto; top: auto; transform: none; margin: 0; break-after: page; }
-  .ui, .modal, .play, .cta.tolink { display: none !important; }
+  .ui, .inl, .soon, .play, .cta.tolink { display: none !important; }
   .printlink { display: inline-flex; gap: 8px; align-items: center; margin-top: 16px; font-size: 15px; color: var(--gold); text-decoration: none; border: 1px solid var(--gold); border-radius: 999px; padding: 8px 14px; align-self: flex-start; }
 }
 
